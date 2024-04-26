@@ -97,7 +97,12 @@ platform_check_image() {
 	qcom,ipq6018-cp01|\
 	qcom,ipq807x-hk01|\
 	qcom,ipq807x-hk14|\
-	qcom,ipq5018-mp03.3)
+	qcom,ipq5018-mp03.3|\
+	muxi,ap3240|\
+	muxi,ap3220|\
+	muxi,ap3221|\
+	muxi,ap3221e|\
+	muxi,ap3222)
 		[ "$magic_long" = "73797375" ] && return 0
 		;;
 	esac
@@ -137,7 +142,12 @@ platform_do_upgrade() {
 	tplink,ex447|\
 	tplink,ex227|\
 	meshpp,s618-cp03|\
-	meshpp,s618-cp01)
+	meshpp,s618-cp01|\
+	muxi,ap3240|\
+	muxi,ap3220|\
+	muxi,ap3221|\
+	muxi,ap3221e|\
+	muxi,ap3222)
 		nand_upgrade_tar "$1"
 		;;
 	hfcl,ion4xi|\

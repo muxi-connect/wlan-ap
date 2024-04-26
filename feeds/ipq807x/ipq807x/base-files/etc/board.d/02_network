@@ -19,7 +19,8 @@ qcom_setup_interfaces()
 		;;
 	cig,wf188|\
 	tplink,ex227|\
-	tplink,ex447)
+	tplink,ex447|\
+	muxi,ap3220)
 		ucidef_set_interface_wan "eth0"
 		ucidef_set_interface_lan ""
 		;;
@@ -39,7 +40,8 @@ qcom_setup_interfaces()
 	motorola,q14|\
 	sercomm,wallaby|\
 	plasmacloud,pax1800-v1|\
-	plasmacloud,pax1800-v2)
+	plasmacloud,pax1800-v2|\
+	muxi,ap3240)
 		ucidef_set_interface_lan "eth0"
 		ucidef_set_interface_wan "eth1"
 		;;
@@ -76,6 +78,15 @@ qcom_setup_interfaces()
 		ucidef_add_switch_attr "switch1" "enable" "false"
 		ucidef_add_switch_attr "switch1" "reset" "true"
 		;;
+	muxi,ap3222)
+		ucidef_set_interface_wan "eth0"
+		ucidef_set_interface_lan "eth1 eth2 eth3 eth4"
+		;;
+	muxi,ap3221|\
+	muxi,ap3221e)
+		ucidef_set_interface_wan "eth0"
+		ucidef_set_interface_lan "eth1"
+		;;
 	esac
 }
 
@@ -109,6 +120,45 @@ qcom_setup_macs()
 	yuncore,ax840)
 		wan_mac=$(cat /sys/class/net/eth1/address)
 		lan_mac=$(macaddr_add "$wan_mac" 1)
+		;;
+	muxi,ap3220)
+		wan_mac=$(mtd_get_mac_binary 0:Product_Info 0x5b)
+		ucidef_set_network_device_mac eth0 $wan_mac
+		ip link set eth0 address $wan_mac
+		;;
+	muxi,ap3221|\
+	muxi,ap3221e)
+		wan_mac=$(mtd_get_mac_binary 0:Product_Info 0x5b)
+		lan_mac=$(macaddr_add "$wan_mac" 1)
+		ucidef_set_network_device_mac eth0 $wan_mac
+		ucidef_set_network_device_mac eth1 $lan_mac
+		ip link set eth0 address $wan_mac
+		ip link set eth1 address $lan_mac
+		;;
+	muxi,ap3222)
+		wan_mac=$(mtd_get_mac_binary 0:Product_Info 0x5b)
+		lan1_mac=$(macaddr_add "$wan_mac" 1)
+		lan2_mac=$(macaddr_add "$wan_mac" 2)
+		lan3_mac=$(macaddr_add "$wan_mac" 3)
+		lan4_mac=$(macaddr_add "$wan_mac" 4)
+		ucidef_set_network_device_mac eth0 $wan_mac
+		ucidef_set_network_device_mac eth1 $lan1_mac
+		ucidef_set_network_device_mac eth2 $lan2_mac
+		ucidef_set_network_device_mac eth3 $lan3_mac
+		ucidef_set_network_device_mac eth4 $lan4_mac
+		ip link set eth0 address $wan_mac
+		ip link set eth1 address $lan1_mac
+		ip link set eth2 address $lan2_mac
+		ip link set eth3 address $lan3_mac
+		ip link set eth4 address $lan4_mac
+		;;
+	muxi,ap3240)
+		wan_mac=$(mtd_get_mac_binary 0:Product_Info 0x5b)
+		lan_mac=$(macaddr_add "$wan_mac" 1)
+		ucidef_set_network_device_mac eth1 $wan_mac
+		ucidef_set_network_device_mac eth0 $lan_mac
+		ip link set eth1 address $wan_mac
+		ip link set eth0 address $lan_mac
 		;;
 	*)
 		wan_mac=$(cat /sys/class/net/eth0/address)

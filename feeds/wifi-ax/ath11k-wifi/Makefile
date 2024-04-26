@@ -46,7 +46,12 @@ ALLWIFIBOARDS:= \
 	tplink-ex227 \
 	tplink-ex447 \
 	yuncore-ax840 \
-	meshpp-s618
+	meshpp-s618 \
+	muxi-ap3240 \
+	muxi-ap3220 \
+	muxi-ap3221 \
+	muxi-ap3221e \
+	muxi-ap3222
 
 ALLWIFIPACKAGES:=$(foreach BOARD,$(ALLWIFIBOARDS),ath11k-wifi-$(BOARD))
 
@@ -252,6 +257,11 @@ $(eval $(call generate-ath11k-wifi-package,tplink-ex227,TP-Link EX227))
 $(eval $(call generate-ath11k-wifi-package,tplink-ex447,TP-Link EX447))
 $(eval $(call generate-ath11k-wifi-package,yuncore-ax840,YunCore AX840))
 $(eval $(call generate-ath11k-wifi-package,meshpp-s618,Mesh++ S618))
+$(eval $(call generate-ath11k-wifi-package,muxi-ap3240,MUXI AP3240))
+$(eval $(call generate-ath11k-wifi-package,muxi-ap3220,MUXI Ap3220))
+$(eval $(call generate-ath11k-wifi-package,muxi-ap3221,MUXI Ap3221))
+$(eval $(call generate-ath11k-wifi-package,muxi-ap3221e,MUXI Ap3221E))
+$(eval $(call generate-ath11k-wifi-package,muxi-ap3222,MUXI Ap3222))
 
 $(foreach PACKAGE,$(ALLWIFIPACKAGES),$(eval $(call BuildPackage,$(PACKAGE))))
 $(eval $(call BuildPackage,ath11k-wifi-qcom-ipq5018))

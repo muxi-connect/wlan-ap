@@ -167,3 +167,39 @@ define Device/meshpp_s618_cp01
   DEVICE_PACKAGES := ath11k-wifi-meshpp-s618 -kmod-usb-dwc3-of-simple kmod-usb-dwc3-qcom kmod-usb3
 endef
 TARGET_DEVICES += meshpp_s618_cp01
+
+define Device/muxi_ap3220
+  DEVICE_TITLE := MUXI AP3220
+  DEVICE_DTS := qcom-ipq6018-muxi-ap3220
+  DEVICE_DTS_CONFIG := config@cp01-c1
+  SUPPORTED_DEVICES := muxi,ap3220
+  DEVICE_PACKAGES := ath11k-wifi-muxi-ap3220 uboot-envtools
+endef
+TARGET_DEVICES += muxi_ap3220
+
+define Device/muxi_ap3221
+  DEVICE_TITLE := MUXI AP3221
+  DEVICE_DTS := qcom-ipq6018-muxi-ap3221
+  DEVICE_DTS_CONFIG := config@cp01-c1
+  SUPPORTED_DEVICES := muxi,ap3221
+  DEVICE_PACKAGES := ath11k-wifi-muxi-ap3221 uboot-envtools
+endef
+TARGET_DEVICES += muxi_ap3221
+
+define Device/muxi_ap3221e
+  DEVICE_TITLE := MUXI AP3221E
+  DEVICE_DTS := qcom-ipq6018-muxi-ap3221e
+  DEVICE_DTS_CONFIG := config@cp01-c1
+  SUPPORTED_DEVICES := muxi,ap3221e
+  DEVICE_PACKAGES := ath11k-wifi-muxi-ap3221e uboot-envtools
+endef
+TARGET_DEVICES += muxi_ap3221e
+
+define Device/muxi_ap3222
+  DEVICE_TITLE := MUXI AP3222
+  DEVICE_DTS := qcom-ipq6018-muxi-ap3222
+  DEVICE_DTS_CONFIG := config@cp03-c1
+  SUPPORTED_DEVICES := muxi,ap3222
+  DEVICE_PACKAGES := ath11k-wifi-muxi-ap3222 uboot-envtools
+endef
+TARGET_DEVICES += muxi_ap3222
