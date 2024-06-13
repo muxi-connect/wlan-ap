@@ -91,3 +91,12 @@ define Device/tplink_ex447
   IMAGE/nand-factory.ubi := append-ubi
 endef
 TARGET_DEVICES += tplink_ex447
+
+define Device/muxi_ap3240
+  DEVICE_TITLE := MUXI AP3240
+  DEVICE_DTS := qcom-ipq807x-ap3240
+  DEVICE_DTS_CONFIG=config@ac02
+  SUPPORTED_DEVICES := muxi,ap3240
+  DEVICE_PACKAGES := ath11k-wifi-muxi-ap3240 kmod-usb2 kmod-usb3 uboot-envtools
+endef
+TARGET_DEVICES += muxi_ap3240
